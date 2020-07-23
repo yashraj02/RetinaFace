@@ -123,6 +123,9 @@ class RetinaFace:
     #self._bbox_pred = nonlinear_pred
     #self._landmark_pred = landmark_pred
     sym, arg_params, aux_params = mx.model.load_checkpoint(prefix, epoch)
+    
+    sym = mx.symbol.load.json('RetinaFace_FP32.json')
+    
     if self.ctx_id>=0:
       self.ctx = mx.gpu(self.ctx_id)
       self.nms = gpu_nms_wrapper(self.nms_threshold, self.ctx_id)
